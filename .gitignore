@@ -1,0 +1,30 @@
+# Java / Maven
+backend/target/
+target/
+**/target/
+*.class
+.mvn/
+*.jar
+*.war
+
+# Node / Vite
+frontend/node_modules/
+node_modules/
+**/node_modules/
+frontend/dist/
+dist/
+**/dist/
+*.log
+
+# IDE & OS
+.idea/
+*.iml
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Uploads & Secrets
+uploads/
+.env
+*.tmp
+
