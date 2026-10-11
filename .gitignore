@@ -25,6 +25,8 @@ Thumbs.db
 
 # Uploads & Secrets
 uploads/
+mysql_data/
 .env
 *.tmp
+
 
