@@ -59,11 +59,9 @@ public class SecurityConfig {
             .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/v1/auth/**").permitAll()
+                .requestMatchers("/api/v1/auth/login", "/api/v1/auth/register", "/error", "/favicon.ico", "/static/**").permitAll()
                 .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
                 .requestMatchers("/api/v1/**").authenticated()
-                // Permit static resources and frontend assets without auth
-                .requestMatchers("/static/**", "/favicon.ico", "/**/*.js", "/**/*.css", "/**/*.html").permitAll()
                 .anyRequest().permitAll()
             );
 

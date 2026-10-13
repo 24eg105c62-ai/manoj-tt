@@ -28,5 +28,5 @@ uploads/
 mysql_data/
 .env
 *.tmp
-
-
+# Accidental nested folder
+skill track/

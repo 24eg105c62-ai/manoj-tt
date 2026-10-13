@@ -2,6 +2,7 @@ package com.pocketskilltrack.controller;
 
 import com.pocketskilltrack.dto.auth.*;
 import com.pocketskilltrack.dto.common.ApiResponse;
+import com.pocketskilltrack.exception.UnauthorizedException;
 import com.pocketskilltrack.security.UserPrincipal;
 import com.pocketskilltrack.service.AuthService;
 import jakarta.validation.Valid;
@@ -33,6 +34,9 @@ public class AuthController {
 
     @GetMapping("/me")
     public ResponseEntity<ApiResponse<UserProfileResponse>> getCurrentUser(@AuthenticationPrincipal UserPrincipal principal) {
+        if (principal == null) {
+            throw new UnauthorizedException("User is not authenticated");
+        }
         UserProfileResponse profile = authService.getProfile(principal.getId());
         return ResponseEntity.ok(ApiResponse.success(profile));
     }
@@ -41,6 +45,9 @@ public class AuthController {
     public ResponseEntity<ApiResponse<UserProfileResponse>> updateProfile(
             @AuthenticationPrincipal UserPrincipal principal,
             @Valid @RequestBody UpdateProfileRequest request) {
+        if (principal == null) {
+            throw new UnauthorizedException("User is not authenticated");
+        }
         UserProfileResponse profile = authService.updateProfile(principal.getId(), request);
         return ResponseEntity.ok(ApiResponse.success("Profile updated successfully", profile));
     }
